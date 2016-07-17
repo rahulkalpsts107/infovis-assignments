@@ -1,0 +1,78 @@
+<html>
+    <head>
+        <title>Assignment 1</title>
+        <script type="application/javascript">
+            var countries =[];
+            function contains(name){//Checks if string is already added . Its case insensitive
+                var ret = false;
+                for(var idx=0 ;idx<countries.length;idx++)
+                    if(countries[idx] == name.toUpperCase())
+                    {
+                        ret = true;
+                        break;
+                    }
+                return ret;
+            }
+            function onClickButton(){ //Onclick function of button
+                var text = document.getElementById('country').value;
+                var table = document.getElementById('countrytable');
+                var newRow   = table.insertRow(table.rows.length);
+                var newCell  = newRow.insertCell(0);
+                var newText  = document.createTextNode(text);
+                if(text == '') //Check if empty
+                {
+                    alert('Empty Input!');
+                    return;
+                }
+                if(contains(text)) //Check if already there
+                {
+                    alert('Already added');
+                    return;
+                }
+                countries.push(text.toUpperCase());
+                newText.style = "font:15px arial; font-family: sans-serif; font-weight:bold;" 
+                newCell.appendChild(newText); //append field to cell in table
+                document.getElementById('country').value='';
+            }
+        </script>
+        <style>
+            #maintitle{
+                background-color: black;
+                color: white;
+                font-family: sans-serif
+            }
+            button{
+                background-color: steelblue;
+                color: white;
+                border-style: none;
+            }
+            #line{
+                position: relative;
+                top: 10px;
+                border-top: 1px solid;
+            }
+            tr:hover {
+                background-color: #ffff99;
+            }
+            label {
+                font: normal  40px ;
+                font-weight:bold;
+            }
+        </style>
+    </head>
+    <body>
+        <h1 id="maintitle">Gapiminder - Wealth and Health</h1>
+        <h2>Countries</h2>
+        <div>
+            <label >Name </label>
+            <input id ="country" type="text"/>
+            <button onclick="onClickButton();"> Add </button>
+            <div id="line" ></div>
+            <table id="countrytable" >
+                <tr >
+                    <td style="height:15px"></td>
+                </tr>
+            </table>
+        </div>
+    </body>
+</html>

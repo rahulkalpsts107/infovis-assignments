@@ -1,0 +1,48 @@
+<html>
+    <head>
+        <title>Assignment 1</title>
+        <script src="http://d3js.org/d3.v3.min.js">
+        </script>
+        <style>
+            #maintitle{
+                background-color: black;
+                color: white;
+                font-family: sans-serif
+            }
+            tr:hover {
+                background-color: #ffff99;
+            }
+        </style>
+    </head>
+    <body >
+        <script type="text/javascript">
+        var countries_json;
+            d3.json("https://raw.githubusercontent.com/CristianFelix/infoviz/master/gapminder.json", function(data) {
+                var idx;
+                for(idx=0;idx<data.length;idx++)
+                {
+                    addCountry(data[idx].name)
+                }
+            });
+
+            function addCountry(country){ //Onclick function of button
+                var text = country;
+                var table = document.getElementById('countrytable');
+                var newRow   = table.insertRow(table.rows.length);
+                var newCell  = newRow.insertCell(0);
+                var newText  = document.createTextNode(text);
+                newText.style = "font:15px arial; font-family: arial; font-weight:bold;" 
+                newCell.appendChild(newText); //append field to cell in table
+            }
+        </script>
+        <h1 id="maintitle">Gapiminder - Wealth and Health</h1>
+        <h2>Countries</h2>
+        <div>
+            <table id="countrytable" >
+                <tr >
+                    <td style="height:5px"></td>
+                </tr>
+            </table>
+        </div>
+    </body>
+</html>

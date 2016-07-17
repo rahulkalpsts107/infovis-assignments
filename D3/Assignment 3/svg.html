@@ -1,0 +1,50 @@
+<html>
+    <head>
+        SVG usage
+    </head>
+    <body>
+        <svg width="600" height = "400">
+            <rect  width ="600" height ="400" fill="none" stroke ="pink" stroke-width ="5" fill-opacity="0.1"/> //Relative pos
+            <g transform="translate(0,10)">
+                <text x="300" y="20" fill="red" text-anchor="middle">SVG!</text>
+                <path transform="translate(10,0)" 
+                      d="M 0 0 L 25 25 L 0 50 L 0 0" 
+                      stroke="none" 
+                      fill="#ccc">
+                </path>
+                <path transform="translate(565,0)" 
+                      d="M 25 0 L 0 25 L 25 50 L 25 0" 
+                      stroke="none" 
+                      fill="#ccc">
+                </path>
+                <line stroke="#ccc" x1="0" x2="600" y1="60" y2="60"></line>
+            </g>
+            <g id="grp1">
+            </g>
+        </svg>
+    </body>
+    <script src="//d3js.org/d3.v3.min.js" charset="utf-8"></script>
+    <script>
+        var data =[];
+        d3.json("data.json" ,function(error,result){
+            data =result;
+            render(data);
+        });
+        var viz = d3.selectAll("#grp1");
+        var width=600;
+        var height =400;
+        margin = {top:90 ,left:20 ,right:20 , bottom:20};
+        var innerWidth = width - margin.left - margin.right;
+        var innerHeight = height -margin.top -margin.bottom;
+        viz.attr("transform","translate("+margin.left+","+margin.top+")");
+        function render(d){
+            var dataPoints = viz.selectAll("circle").data(data);
+            dataPoints.enter()
+            .append("circle")
+            .attr("r",5)
+            .attr("cx", function(d,i){ return Math.random() * innerWidth})
+            .attr("cy", function(d,i){ return Math.random() * innerHeight})
+            .attr("fill","red");
+        }
+    </script>
+</html>
